@@ -1,0 +1,16 @@
+Projecto 1: Simulador de "population protocols"
+==============================
+
+Existe uma área onde tenho feito muito pouco trabalho, mas que me suscita alguma curiosidade, que é uma área que estuda algoritmos para redes móveis de um ponto de vista muito abstracto.  Basicamente a rede móvel é modelada como um conjunto de nós que se encontra de forma aleatória. Tipicamente o problema é perceber o que é que se consegue fazer nestes sistemas e com que custo.  A maioria do trabalho que tenho em mente é bastante teórica. Geralmente os artigos provam que é possível ou impossível resolver um problema sem se preocuparem em fazer protótipos (que não fazem muito sentido de qualquer forma dado o grau de abstracção do modelo).  No entanto, seria interessante ter um simulador que permitisse “experimentar” alguns algoritmos. Isto porque às vezes, através de simulação, é mais rápido perceber se algo não está a funcionar, e porque é que não funciona, antes de perder tempo a tentar desenvolver provas de correcção.  Portanto weste projecto seria desenvolver um simulador simples para este tipo de coisas.
+
+Junto envio um pequeno programa que estive a fazer rapidamente (isto nao esta comentado). Basicamente isto simula um “population protocol” super simples, em que todos os nos possuem inicialmente um valor e no final todos ficam com um valor que é o máximo dos valores iniciais. A ideia seria usar este código como ponto de partida para ir evoluindo o simulador para ficar mais potente e genérico. Entre as coisas que se poderiam fazer, teriamos:
+
+- fase 1: permitir alterar coisas como o numero total de nós, e alguns dos parametros de simulacao (por exemplo, numero de rounds) sem ter de recompilar o programa. por exemplo, lendo estes valores de um fiheiro de configuracao
+
+- fase 2: tentar organizar o  código de forma a separar o que é genérico do simulador e especifico de um algoritmo em particular (ja tentei fazer um pouco isso). Por exemplo, se eu quizer simular um dos algoritmos que esta no survey dos population protocols (por exemplo, aquele que indica se ha mais leaders ou mais followers), deveria ser facil de perceber quais as funcoes que tenho de alterar.
+
+- fase 3: permitir simular falhas de diferentes tipos
+
+- fase 4: a ver
+
+Junto envio dois artigos sobre este tema "An Introduction to Population Protocols" e "Stabilizing Consensus in Mobile Networks"
