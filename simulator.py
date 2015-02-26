@@ -1,4 +1,5 @@
 import random
+import SPP_io
 """
 maxnodes = 4
 experiments =2
@@ -9,21 +10,6 @@ maxnodeval = 200
 
 nodes = []
 
-
-def dumpstates():
-    """ Prints the nodes representation."""
-    string = ""
-    for i in range(len(nodes)):
-        print("----Node[%d].my_val=%d;" % (i,nodes[i].value))
-        
-
-def readvalues(filename):
-    """reads input configuration from filename"""
-    file = open(filename,"r")
-    for line in file:
-        results = line[:-1].split(",")
-        results = tuple([int(elem) for elem in results])
-    return results
 
 def selectRandomInt(maxvalue):
     """ Selects a random value between 0 and (maxvalue-1)."""
@@ -116,7 +102,7 @@ def main():
     global runsPerExp
     global roundsPerRun
     global maxnodeval
-    maxnodes, experiments, runsPerExp, roundsPerRun, maxnodeval = readvalues("specifications.txt")
+    maxnodes, experiments, runsPerExp, roundsPerRun, maxnodeval = SPP_io.readvalues("specifications.txt")
     
     for i in range(maxnodes):
         nodes += [Node()]
@@ -137,7 +123,7 @@ def main():
                 print("\n--Experiment %d, run %d, OK" % (experiment, run))
             else:
                 print("\n--Experiment %d, run %d, FAILED" % (experiment, run))
-            dumpstates()
+            SPP_io.dumpstates(nodes)
     print("DONE.")
     
     
