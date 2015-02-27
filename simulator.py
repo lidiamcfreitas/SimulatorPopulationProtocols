@@ -27,14 +27,12 @@ class Node:
     
     def setValue(self, val):
         self.value = val
-
-
     
 
 # MAIN #
 
 
-def main():
+def experiment():
     
     global nodes 
     global maxnodes
@@ -42,7 +40,6 @@ def main():
     global runsPerExp
     global roundsPerRun
     global maxnodeval
-    maxnodes, experiments, runsPerExp, roundsPerRun, maxnodeval = SPP_io.readvalues("specifications.txt")
     
     for i in range(maxnodes):
         nodes += [Node()]
@@ -59,12 +56,28 @@ def main():
                 node1 = SPP_aux.selectRandomNode(nodes)
                 node2 = SPP_aux.selectRandomNode(nodes)
                 SPP_encounter.Max().encounter(node1,node2)
+                
             if (assertAlgo(maxInNetwork)):
                 print("\n--Experiment %d, run %d, OK" % (experiment, run))
             else:
                 print("\n--Experiment %d, run %d, FAILED" % (experiment, run))
             SPP_io.dumpstates(nodes)
     print("DONE.")
+    
+def main():
+    global nodes 
+    global maxnodes
+    global experiments
+    global runsPerExp
+    global roundsPerRun
+    global maxnodeval
+    
+    test = SPP_io.readvalues("specifications.txt")
+    for t in test:
+        print("______________________TEST______________________")
+        print(t)
+        maxnodes, experiments, runsPerExp, roundsPerRun, maxnodeval = t
+        experiment()
     
     
 if __name__ == "__main__":

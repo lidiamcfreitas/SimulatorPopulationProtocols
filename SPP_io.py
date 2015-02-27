@@ -8,7 +8,9 @@ def dumpstates(nodes):
 def readvalues(filename):
     """reads input configuration from filename"""
     file = open(filename,"r")
+    res = []
     for line in file:
         results = line[:-1].split(",")
-        results = tuple([int(elem) for elem in results])
-    return results
+        res += [tuple([int(elem) for elem in results])]
+    print(res)
+    return res
