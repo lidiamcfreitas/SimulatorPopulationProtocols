@@ -4,8 +4,6 @@ import SPP_init
 import SPP_aux
 import SPP_encounter
 
-nodes = []
-
 def initnodes(algorithm):
     """ Initializes the nodes given an algorithm."""
     return algorithm.execute(nodes,maxnodeval)
@@ -41,6 +39,7 @@ def experiment():
     global roundsPerRun
     global maxnodeval
     
+    nodes = []
     for i in range(maxnodes):
         nodes += [Node()]
         
@@ -75,8 +74,8 @@ def main():
     test = SPP_io.readvalues("specifications.txt")
     for t in test:
         print("______________________TEST______________________")
-        print(t)
         maxnodes, experiments, runsPerExp, roundsPerRun, maxnodeval = t
+        print("NODES:",maxnodes)
         experiment()
     
     

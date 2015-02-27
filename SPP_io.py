@@ -12,5 +12,4 @@ def readvalues(filename):
     for line in file:
         results = line[:-1].split(",")
         res += [tuple([int(elem) for elem in results])]
-    print(res)
     return res
