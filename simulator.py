@@ -1,31 +1,15 @@
-import random
 import SPP_io
-"""
-maxnodes = 4
-experiments =2
-runsPerExp = 10
-roundsPerRun = 10
-maxnodeval = 200
-"""
+import SPP_exceptions
+import SPP_init
+import SPP_aux
 
 nodes = []
 
-
-def selectRandomInt(maxvalue):
-    """ Selects a random value between 0 and (maxvalue-1)."""
-    return int(random.random()*maxvalue)
-
-def selectRandomNode():
-    """ Selects a random node by returning it's index."""
-    return selectRandomInt(maxnodes)
-
 def initnodes(algorithm):
     """ Initializes the nodes given an algorithm."""
-    return algorithm.execute()
+    return algorithm.execute(nodes,maxnodeval)
 
-def getmax(i,j):
-    """ Returns the maximum value of i and j."""
-    return (i,j)[i<j] # true - 1; false - 0
+
 
 def assertAlgo(maxInNetwork):
     """Verifies the value of the nodes to equal maxInNetwork. 0-incorrect.1-correct."""
@@ -38,56 +22,18 @@ def assertAlgo(maxInNetwork):
 
 def encounter( i, j):
     """Specifies the algorithm to use when two nodes collide."""
-    nodes[i].value = getmax(nodes[i].value, nodes[j].value)
+    i.value = SPP_aux.getmax(i.value, j.value)
 
-
-class ErrorAlgorithm(Exception):
-    """Error to be used for abstract classes."""
-    def __str__(self):
-        return "Please implement all the methods."
 
 class Node:
     """Class node defines an agent."""
     def __init__(self):
-        self.value = selectRandomInt(maxnodeval)
+        self.value = SPP_aux.selectRandomInt(maxnodeval)
     
     def setValue(self, val):
         self.value = val
 
-class InitAlgorithm:
-    """Abstract class of initializors"""
-    def execute(self):
-        raise ErrorAlgorithm
-    
-class AllNodesEqual(InitAlgorithm):
-    """Initializes all agents with the same value"""
-    def __init__(self):
-        super(AllNodesEqual, self)
-    
-    def execute(self):
-        maxInNetwork = selectRandomInt(maxnodeval)
-        for node in nodes:
-            node.setValue(maxInNetwork)
-        return maxInNetwork
-    
-    def __str__(self):
-        return "all nodes equal"
 
-class AllNodesDif(InitAlgorithm):
-    """Initializes all agents with different values from 0 to maxnodeval"""
-    def __init__(self):
-        super(AllNodesDif, self)
-    
-    def execute(self):
-        maxInNetwork = -1
-        for node in nodes:
-            randomVal = selectRandomInt(maxnodeval)
-            maxInNetwork = getmax(maxInNetwork, randomVal)
-            node.value = randomVal
-        return maxInNetwork
-    
-    def __str__(self):
-        return "all nodes different"
     
 
 # MAIN #
@@ -95,7 +41,6 @@ class AllNodesDif(InitAlgorithm):
 
 def main():
     
-    random.seed() # initializes the seed with the current system time (default)
     global nodes 
     global maxnodes
     global experiments
@@ -109,16 +54,16 @@ def main():
         
     print("STARTING %d experiments, %d runs each\n" % (experiments, runsPerExp))
     
-    exps = [AllNodesEqual(), AllNodesDif()]
+    exps = [SPP_init.AllNodesEqual(), SPP_init.AllNodesDif()]
     
     for experiment in range(experiments):
         for run in range(runsPerExp):
             maxInNetwork = initnodes(exps[experiment])
             
             for round in range(roundsPerRun):
-                i = selectRandomNode()
-                j = selectRandomNode()
-                encounter(i,j)
+                node1 = SPP_aux.selectRandomNode(nodes)
+                node2 = SPP_aux.selectRandomNode(nodes)
+                encounter(node1,node2)
             if (assertAlgo(maxInNetwork)):
                 print("\n--Experiment %d, run %d, OK" % (experiment, run))
             else:
