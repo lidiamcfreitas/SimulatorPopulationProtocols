@@ -2,14 +2,13 @@ import SPP_io
 import SPP_exceptions
 import SPP_init
 import SPP_aux
+import SPP_encounter
 
 nodes = []
 
 def initnodes(algorithm):
     """ Initializes the nodes given an algorithm."""
     return algorithm.execute(nodes,maxnodeval)
-
-
 
 def assertAlgo(maxInNetwork):
     """Verifies the value of the nodes to equal maxInNetwork. 0-incorrect.1-correct."""
@@ -19,10 +18,6 @@ def assertAlgo(maxInNetwork):
                 return 0
         return 1
     return 0
-
-def encounter( i, j):
-    """Specifies the algorithm to use when two nodes collide."""
-    i.value = SPP_aux.getmax(i.value, j.value)
 
 
 class Node:
@@ -63,7 +58,7 @@ def main():
             for round in range(roundsPerRun):
                 node1 = SPP_aux.selectRandomNode(nodes)
                 node2 = SPP_aux.selectRandomNode(nodes)
-                encounter(node1,node2)
+                SPP_encounter.Max().encounter(node1,node2)
             if (assertAlgo(maxInNetwork)):
                 print("\n--Experiment %d, run %d, OK" % (experiment, run))
             else:
