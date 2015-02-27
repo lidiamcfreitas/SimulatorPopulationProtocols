@@ -1,4 +1,5 @@
 import SPP_aux
+import SPP_exceptions
 
 class EncounterAlgorithm:
     """Abstract class of encounter algorithms"""
