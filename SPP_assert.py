@@ -1,6 +1,8 @@
 import SPP_aux
 import SPP_exceptions
 
+
+
 class AssertAlgorithm:
     """Abstract class of assert algorithms"""
     def execute(self,nodes,maxnodeval):
@@ -19,4 +21,6 @@ class AllEqual(AssertAlgorithm):
         return 0
     
     def __str__(self):
-        return "assert: all equal values"
+        return "equal"
+    
+algorithms=[AllEqual()]

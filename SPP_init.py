@@ -17,7 +17,7 @@ class AllNodesEqual(InitAlgorithm):
         return maxInNetwork
     
     def __str__(self):
-        return "all nodes equal"
+        return "equal"
 
 class AllNodesDif(InitAlgorithm):
     """Initializes all agents with different values from 0 to maxnodeval"""
@@ -33,4 +33,6 @@ class AllNodesDif(InitAlgorithm):
         return maxInNetwork
     
     def __str__(self):
-        return "all nodes different"
+        return "diff"
+    
+algorithms=[AllNodesEqual(),AllNodesDif()]

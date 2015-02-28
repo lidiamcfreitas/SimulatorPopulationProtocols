@@ -9,9 +9,11 @@ class EncounterAlgorithm:
 class Max(EncounterAlgorithm):
     """Algorithm to find maximum value between agents"""
     
-    def encounter(self, node1, node2):
+    def execute(self, node1, node2):
         """Specifies the algorithm to use when two nodes collide."""
         node1.value = SPP_aux.getmax(node1.value, node2.value)
     
     def __str__(self):
-        return "encounter: maximum value"
+        return "max"
+    
+algorithms=[Max()]
